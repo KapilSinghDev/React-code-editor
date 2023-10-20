@@ -103,7 +103,7 @@ function App() {
           </div>
           <div className='Techeditor'>
             {/*  below are the three editors that are being shown as depending upon the value of active state */}
-            <div className='editor'>
+            
             {active === "HTML" && (
               <Editor
               height="90vh"
@@ -135,7 +135,6 @@ function App() {
                 options={{readOnly: lock}} 
               />
             )}
-            </div>
           </div>
         </div>
       </div>
