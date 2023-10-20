@@ -42,7 +42,6 @@
                   color:rgb(51, 224, 51)
                 }
                 .lock-bar-open{
-                  // transition-delay:1.5s smooth;
                   width: 60%;
                   background-color: rgb(148, 236, 148);
                   text-align: center;
@@ -54,32 +53,30 @@
               .utils-btn{
                 width: 30%;
                 height: fit-content;
-                // background-color: red;
                 display: flex;
                 flex-direction: row;
               }
               .Techeditor{
                 height: 95vh;
                 width: 100%;
-                // border: 1px solid red;
                 background-color: black;
                 .editor{
                   background-color: aliceblue;
                   height: 90vh;
-                  width: 90vh;
-                  margin-left: 5%;
+                  width: 80vh;
+                  margin-left: 2%;
                 }
               }
           }
           display: flex;
       }
       .resultbox{
-          height: 99vh;
+          height: 100vh;
           width:100%;
           border: 1px solid black;
           background-color: black;
           .frames{
-            margin-top: 2%;
+            // margin-top: 2%;
             margin-left: 2%;
             background-color: aliceblue;
           }

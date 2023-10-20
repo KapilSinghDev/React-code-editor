@@ -11,7 +11,7 @@ function App() {
   const handleChange = (tabval) => {
     setActive(tabval);
   }
-
+  //  this function helps to copy the code and iframe is being passed as a context to this
   const copyToClipboard = (content) => {
     navigator.clipboard.writeText(content)
       .then(() => {
@@ -21,7 +21,9 @@ function App() {
         console.error("Copy to clipboard failed: ", error);
       });
   }
+  //  this state is used for toggling the readyOnly property of the monaco editor 
   const [lock, setLock] = useState(false);
+  //  this part of the code is used for saving the code as txt file in the local device
   const saveCode = () => {
     const code = {
       html: HTML,
@@ -29,7 +31,7 @@ function App() {
       js: JS,
     };
     const codeText = JSON.stringify(code);
-    const fileName = "myCode.txt";
+    const fileName = "Code.txt";
     const blob = new Blob([codeText], {
       type: "text/plain", 
     });
@@ -38,7 +40,6 @@ function App() {
     a.href = url;
     a.download = fileName;
     a.click();
-  
     window.URL.revokeObjectURL(url);
   };
   const frame = `
@@ -87,34 +88,37 @@ function App() {
                 className="btn" 
                 onClick={() => copyToClipboard(frame)}
               >
-                Copy
+                COPY
               </button>
               <button className="btn" onClick={saveCode}>
-                save
+                SAVE
               </button>
               <button className='btn' onClick={() => setLock(!lock)}>
-                {lock === true ? "unlock" : "lock"}
+                {lock === true ? "UNLOCK" : "LOCK"}
               </button>
+              {/*  this div is being toggled such that  it will change its color and text according to the lock variable */}
               <div className={lock === true ? "lock-bar" : "lock-bar-open"}>
-                {lock === true ? " locked" : "OPEN"}
+                {lock === true ? " LOCKED" : "OPEN"}
               </div>
           </div>
           <div className='Techeditor'>
+            {/*  below are the three editors that are being shown as depending upon the value of active state */}
             <div className='editor'>
             {active === "HTML" && (
               <Editor
               height="90vh"
-                width="80vh"
+                width="90vh"
                 defaultLanguage="html"
                 defaultValue={HTML}
                 onChange={(value, e) => setHTML(value)}
-                options={{readOnly: lock}}
+                //  below proprty is being used to lock and unlock the editor
+                options={{readOnly: lock}} 
               />
             )}
             {active === "CSS" && (
               <Editor
-                height="50vh"
-                width="95vh"
+                height="90vh"
+                width="80vh"
                 defaultLanguage="css"
                 defaultValue={CSS}
                 onChange={(value, e) => setCSS(value)}
@@ -123,8 +127,8 @@ function App() {
             )}
             {active === "JS" && (
               <Editor
-                height="50vh"
-                width="95vh"
+                height="90vh"
+                width="80vh"
                 defaultLanguage="javascript"
                 defaultValue={JS}
                 onChange={(value, e) => setJS(value)}
@@ -135,8 +139,9 @@ function App() {
           </div>
         </div>
       </div>
+      {/* this is the final section where compiled code can be seen */}
       <div className='resultbox'>
-        <iframe className='frames' height={"97%"} width={"95%"} srcDoc={frame} />
+        <iframe className='frames' height={"95%"} width={"95%"} srcDoc={frame} />
       </div>
     </div>
   );
